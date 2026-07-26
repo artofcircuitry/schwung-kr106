@@ -390,11 +390,17 @@ static void v2_render_block(void *instance, int16_t *out_interleaved_lr, int fra
     float *outputs[2] = { inst->bufL, inst->bufR };
     inst->dsp->ProcessBlock(nullptr, outputs, 2, frames);
 
-    /* soft clip (tanh) then convert; hard bound as a safety net */
+    /* Headroom trim, then soft clip (tanh) and convert; hard bound as a
+     * safety net. Survey of all 256 factory presets (4-note chord, vel 127)
+     * showed pre-trim float peaks of median 1.44 / max 6.8 — without the
+     * trim, 217/256 presets drove the tanh into audible saturation on the
+     * Move. 0.25 puts the median worst-case peak at ~-9 dBFS; only the few
+     * hottest presets ever brush the knee. */
+    static constexpr float kOutputHeadroom = 0.25f;
     for (int i = 0; i < frames; i++)
     {
-        int32_t l = (int32_t)(tanhf(inst->bufL[i]) * 32767.f);
-        int32_t r = (int32_t)(tanhf(inst->bufR[i]) * 32767.f);
+        int32_t l = (int32_t)(tanhf(inst->bufL[i] * kOutputHeadroom) * 32767.f);
+        int32_t r = (int32_t)(tanhf(inst->bufR[i] * kOutputHeadroom) * 32767.f);
         if (l > 32767) l = 32767; else if (l < -32768) l = -32768;
         if (r > 32767) r = 32767; else if (r < -32768) r = -32768;
         out_interleaved_lr[i * 2]     = (int16_t)l;
