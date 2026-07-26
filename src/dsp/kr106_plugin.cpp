@@ -21,6 +21,7 @@
 #include "kr106/KR106_DSP.h"
 #include "kr106/KR106_DSP_SetParam.h"
 #include "kr106/KR106_Presets_JUCE.h"
+#include "kr106_ui_hierarchy.h"
 
 /* EParams — must match Source/DSP/KR106_DSP_SetParam.h enum order */
 enum EParams
@@ -362,6 +363,22 @@ static int v2_get_param(void *instance, const char *key, char *buf, int buf_len)
         return snprintf(buf, buf_len, "%d", inst->oscMode);
     if (strcmp(key, "ignore_velocity") == 0)
         return snprintf(buf, buf_len, "%d", inst->ignoreVelocity);
+
+    /* Shadow UI parameter hierarchy + flat param metadata — the Schwung host
+     * queries these FROM THE DSP (module.json's copy is only used for the
+     * chain_params cache); without them the chain UI falls back to the bare
+     * preset browser and the encoders stay dead. Generated from module.json
+     * by scripts/gen_ui_hierarchy.py (single source of truth). */
+    if (strcmp(key, "ui_hierarchy") == 0) {
+        int len = (int)strlen(kUiHierarchyJson);
+        if (len < buf_len) { memcpy(buf, kUiHierarchyJson, (size_t)len + 1); return len; }
+        return -1;
+    }
+    if (strcmp(key, "chain_params") == 0) {
+        int len = (int)strlen(kChainParamsJson);
+        if (len < buf_len) { memcpy(buf, kChainParamsJson, (size_t)len + 1); return len; }
+        return -1;
+    }
 
     int t = lookupParam(key);
     if (t >= 0)

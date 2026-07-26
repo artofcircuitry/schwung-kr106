@@ -48,6 +48,8 @@ ${CROSS_PREFIX}g++ -O3 -shared -fPIC -std=c++17 \
     -lm
 
 echo "Packaging..."
+# regenerate the compiled-in UI hierarchy from module.json (source of truth)
+python3 "$SCRIPT_DIR/gen_ui_hierarchy.py" 2>/dev/null || python "$SCRIPT_DIR/gen_ui_hierarchy.py"
 cat src/module.json > dist/kr106/module.json
 cat src/ui.js > dist/kr106/ui.js
 cat build/dsp.so > dist/kr106/dsp.so
