@@ -22,96 +22,675 @@
         "root": {
           "name": "KR-106",
           "params": [
-            {"key": "preset", "label": "Preset", "type": "int", "min": 0, "max_param": "preset_count", "default": 128},
-            {"key": "volume", "label": "Volume", "type": "float", "min": 0.0, "max": 1.0, "default": 0.5, "step": 0.02, "unit": "%"},
-            {"key": "vcf_freq", "label": "Cutoff", "type": "float", "min": 0.0, "max": 1.0, "default": 0.5, "step": 0.02, "unit": "%"},
-            {"key": "vcf_res", "label": "Resonance", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "vcf_env", "label": "VCF Env", "type": "float", "min": 0.0, "max": 1.0, "default": 0.5, "step": 0.02, "unit": "%"},
-            {"key": "attack", "label": "Attack", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "release", "label": "Release", "type": "float", "min": 0.0, "max": 1.0, "default": 0.1, "step": 0.02, "unit": "%"},
-            {"key": "chorus", "label": "Chorus", "type": "enum", "options": ["Off", "I", "II"], "default": 0},
-            {"level": "dco", "label": "DCO"},
-            {"level": "vcf", "label": "VCF / HPF"},
-            {"level": "env", "label": "Envelope / VCA"},
-            {"level": "lfo", "label": "LFO / Chorus"},
-            {"level": "perf", "label": "Performance"},
-            {"level": "engine", "label": "Engine Settings"}
+            {
+              "key": "preset",
+              "label": "Preset",
+              "type": "int",
+              "min": 0,
+              "max_param": "preset_count",
+              "default": 128
+            },
+            {
+              "key": "volume",
+              "label": "Volume",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.5,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vcf_freq",
+              "label": "Cutoff",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.5,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vcf_res",
+              "label": "Resonance",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vcf_env",
+              "label": "VCF Env",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.5,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "attack",
+              "label": "Attack",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "release",
+              "label": "Release",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.1,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "chorus",
+              "label": "Chorus",
+              "type": "enum",
+              "options": [
+                "Off",
+                "I",
+                "II"
+              ],
+              "default": 0
+            },
+            {
+              "level": "dco",
+              "label": "DCO"
+            },
+            {
+              "level": "vcf",
+              "label": "VCF / HPF"
+            },
+            {
+              "level": "env",
+              "label": "Envelope / VCA"
+            },
+            {
+              "level": "lfo",
+              "label": "LFO / Chorus"
+            },
+            {
+              "level": "perf",
+              "label": "Performance"
+            },
+            {
+              "level": "arp",
+              "label": "Arpeggiator"
+            },
+            {
+              "level": "engine",
+              "label": "Engine Settings"
+            }
           ],
-          "knobs": ["preset", "volume", "vcf_freq", "vcf_res", "vcf_env", "attack", "release", "chorus"]
+          "knobs": [
+            "preset",
+            "volume",
+            "vcf_freq",
+            "vcf_res",
+            "vcf_env",
+            "attack",
+            "release",
+            "chorus"
+          ]
         },
         "dco": {
           "name": "DCO",
           "params": [
-            {"key": "oct_range", "label": "Range", "type": "enum", "options": ["16'", "8'", "4'"], "default": 1},
-            {"key": "dco_pulse", "label": "Pulse", "type": "enum", "options": ["Off", "On"], "default": 1},
-            {"key": "dco_saw", "label": "Saw", "type": "enum", "options": ["Off", "On"], "default": 1},
-            {"key": "dco_sub_sw", "label": "Sub Switch", "type": "enum", "options": ["Off", "On"], "default": 0},
-            {"key": "dco_sub", "label": "Sub Level", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "dco_noise", "label": "Noise", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "dco_pwm", "label": "PWM", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "pwm_mode", "label": "PWM Mode", "type": "enum", "options": ["LFO", "Manual"], "default": 1}
+            {
+              "key": "oct_range",
+              "label": "Range",
+              "type": "enum",
+              "options": [
+                "16'",
+                "8'",
+                "4'"
+              ],
+              "default": 1
+            },
+            {
+              "key": "dco_pulse",
+              "label": "Pulse",
+              "type": "enum",
+              "options": [
+                "Off",
+                "On"
+              ],
+              "default": 1
+            },
+            {
+              "key": "dco_saw",
+              "label": "Saw",
+              "type": "enum",
+              "options": [
+                "Off",
+                "On"
+              ],
+              "default": 1
+            },
+            {
+              "key": "dco_sub_sw",
+              "label": "Sub Switch",
+              "type": "enum",
+              "options": [
+                "Off",
+                "On"
+              ],
+              "default": 0
+            },
+            {
+              "key": "dco_sub",
+              "label": "Sub Level",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "dco_noise",
+              "label": "Noise",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "dco_pwm",
+              "label": "PWM",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "pwm_mode",
+              "label": "PWM Mode",
+              "type": "enum",
+              "options": [
+                "LFO",
+                "Manual"
+              ],
+              "default": 1
+            }
           ],
-          "knobs": ["oct_range", "dco_pulse", "dco_saw", "dco_sub_sw", "dco_sub", "dco_noise", "dco_pwm", "pwm_mode"]
+          "knobs": [
+            "oct_range",
+            "dco_pulse",
+            "dco_saw",
+            "dco_sub_sw",
+            "dco_sub",
+            "dco_noise",
+            "dco_pwm",
+            "pwm_mode"
+          ]
         },
         "vcf": {
           "name": "VCF / HPF",
           "params": [
-            {"key": "hpf_freq", "label": "HPF", "type": "int", "min": 0, "max": 3, "default": 0},
-            {"key": "vcf_freq", "label": "Cutoff", "type": "float", "min": 0.0, "max": 1.0, "default": 0.5, "step": 0.02, "unit": "%"},
-            {"key": "vcf_res", "label": "Resonance", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "vcf_env", "label": "Env Amt", "type": "float", "min": 0.0, "max": 1.0, "default": 0.5, "step": 0.02, "unit": "%"},
-            {"key": "vcf_env_inv", "label": "Env Polarity", "type": "enum", "options": ["Normal", "Inverted"], "default": 0},
-            {"key": "vcf_lfo", "label": "LFO Amt", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "vcf_kbd", "label": "Key Follow", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"}
+            {
+              "key": "hpf_freq",
+              "label": "HPF",
+              "type": "int",
+              "min": 0,
+              "max": 3,
+              "default": 0
+            },
+            {
+              "key": "vcf_freq",
+              "label": "Cutoff",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.5,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vcf_res",
+              "label": "Resonance",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vcf_env",
+              "label": "Env Amt",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.5,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vcf_env_inv",
+              "label": "Env Polarity",
+              "type": "enum",
+              "options": [
+                "Normal",
+                "Inverted"
+              ],
+              "default": 0
+            },
+            {
+              "key": "vcf_lfo",
+              "label": "LFO Amt",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vcf_kbd",
+              "label": "Key Follow",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            }
           ],
-          "knobs": ["hpf_freq", "vcf_freq", "vcf_res", "vcf_env", "vcf_env_inv", "vcf_lfo", "vcf_kbd"]
+          "knobs": [
+            "hpf_freq",
+            "vcf_freq",
+            "vcf_res",
+            "vcf_env",
+            "vcf_env_inv",
+            "vcf_lfo",
+            "vcf_kbd"
+          ]
         },
         "env": {
           "name": "Envelope / VCA",
           "params": [
-            {"key": "attack", "label": "Attack", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "decay", "label": "Decay", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "sustain", "label": "Sustain", "type": "float", "min": 0.0, "max": 1.0, "default": 1.0, "step": 0.02, "unit": "%"},
-            {"key": "release", "label": "Release", "type": "float", "min": 0.0, "max": 1.0, "default": 0.1, "step": 0.02, "unit": "%"},
-            {"key": "vca_mode", "label": "VCA Mode", "type": "enum", "options": ["Env", "Gate"], "default": 0},
-            {"key": "vca_level", "label": "VCA Level", "type": "float", "min": 0.0, "max": 1.0, "default": 0.5, "step": 0.02, "unit": "%"},
-            {"key": "adsr_mode", "label": "Model", "type": "enum", "options": ["Juno-60", "Juno-106"], "default": 1}
+            {
+              "key": "attack",
+              "label": "Attack",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "decay",
+              "label": "Decay",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "sustain",
+              "label": "Sustain",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 1.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "release",
+              "label": "Release",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.1,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "vca_mode",
+              "label": "VCA Mode",
+              "type": "enum",
+              "options": [
+                "Env",
+                "Gate"
+              ],
+              "default": 0
+            },
+            {
+              "key": "vca_level",
+              "label": "VCA Level",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.5,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "adsr_mode",
+              "label": "Model",
+              "type": "enum",
+              "options": [
+                "Juno-60",
+                "Juno-106"
+              ],
+              "default": 1
+            }
           ],
-          "knobs": ["attack", "decay", "sustain", "release", "vca_mode", "vca_level", "adsr_mode"]
+          "knobs": [
+            "attack",
+            "decay",
+            "sustain",
+            "release",
+            "vca_mode",
+            "vca_level",
+            "adsr_mode"
+          ]
         },
         "lfo": {
           "name": "LFO / Chorus",
           "params": [
-            {"key": "lfo_rate", "label": "LFO Rate", "type": "float", "min": 0.0, "max": 1.0, "default": 0.3, "step": 0.02, "unit": "%"},
-            {"key": "lfo_delay", "label": "LFO Delay", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "lfo_mode", "label": "LFO Trig", "type": "enum", "options": ["Auto", "Manual"], "default": 0},
-            {"key": "dco_lfo", "label": "DCO LFO", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "chorus", "label": "Chorus", "type": "enum", "options": ["Off", "I", "II"], "default": 0}
+            {
+              "key": "lfo_rate",
+              "label": "LFO Rate",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.3,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "lfo_delay",
+              "label": "LFO Delay",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "lfo_mode",
+              "label": "LFO Trig",
+              "type": "enum",
+              "options": [
+                "Auto",
+                "Manual"
+              ],
+              "default": 0
+            },
+            {
+              "key": "dco_lfo",
+              "label": "DCO LFO",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "chorus",
+              "label": "Chorus",
+              "type": "enum",
+              "options": [
+                "Off",
+                "I",
+                "II"
+              ],
+              "default": 0
+            }
           ],
-          "knobs": ["lfo_rate", "lfo_delay", "lfo_mode", "dco_lfo", "chorus"]
+          "knobs": [
+            "lfo_rate",
+            "lfo_delay",
+            "lfo_mode",
+            "dco_lfo",
+            "chorus"
+          ]
         },
         "perf": {
           "name": "Performance",
           "params": [
-            {"key": "porta_mode", "label": "Portamento", "type": "enum", "options": ["Off", "Poly I", "Poly II"], "default": 1},
-            {"key": "porta_rate", "label": "Porta Rate", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "bender_dco", "label": "Bend DCO", "type": "float", "min": 0.0, "max": 1.0, "default": 0.5, "step": 0.02, "unit": "%"},
-            {"key": "bender_vcf", "label": "Bend VCF", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "bender_lfo", "label": "Bend LFO", "type": "float", "min": 0.0, "max": 1.0, "default": 0.0, "step": 0.02, "unit": "%"},
-            {"key": "hold", "label": "Hold", "type": "enum", "options": ["Off", "On"], "default": 0},
-            {"key": "octave_transpose", "label": "Octave", "type": "int", "min": -2, "max": 2, "default": 0}
+            {
+              "key": "porta_mode",
+              "label": "Portamento",
+              "type": "enum",
+              "options": [
+                "Off",
+                "Poly I",
+                "Poly II"
+              ],
+              "default": 1
+            },
+            {
+              "key": "porta_rate",
+              "label": "Porta Rate",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "bender_dco",
+              "label": "Bend DCO",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.5,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "bender_vcf",
+              "label": "Bend VCF",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "bender_lfo",
+              "label": "Bend LFO",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.0,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "hold",
+              "label": "Hold",
+              "type": "enum",
+              "options": [
+                "Off",
+                "On"
+              ],
+              "default": 0
+            },
+            {
+              "key": "octave_transpose",
+              "label": "Octave",
+              "type": "int",
+              "min": -2,
+              "max": 2,
+              "default": 0
+            }
           ],
-          "knobs": ["porta_mode", "porta_rate", "bender_dco", "bender_vcf", "bender_lfo", "hold", "octave_transpose"]
+          "knobs": [
+            "porta_mode",
+            "porta_rate",
+            "bender_dco",
+            "bender_vcf",
+            "bender_lfo",
+            "hold",
+            "octave_transpose"
+          ]
         },
         "engine": {
           "name": "Engine Settings",
           "params": [
-            {"key": "polyphony", "label": "Voices", "type": "int", "min": 6, "max": 10, "default": 6},
-            {"key": "oversample", "label": "Oversample", "type": "enum", "options": ["1", "2", "4"], "default": 1},
-            {"key": "osc_mode", "label": "Oscillator", "type": "enum", "options": ["Wavetable", "PolyBLEP"], "default": 1},
-            {"key": "ignore_velocity", "label": "Velocity", "type": "enum", "options": ["On", "Ignore"], "default": 1}
+            {
+              "key": "polyphony",
+              "label": "Voices",
+              "type": "int",
+              "min": 6,
+              "max": 10,
+              "default": 6
+            },
+            {
+              "key": "oversample",
+              "label": "Oversample",
+              "type": "enum",
+              "options": [
+                "1",
+                "2",
+                "4"
+              ],
+              "default": 1
+            },
+            {
+              "key": "osc_mode",
+              "label": "Oscillator",
+              "type": "enum",
+              "options": [
+                "Wavetable",
+                "PolyBLEP"
+              ],
+              "default": 1
+            },
+            {
+              "key": "ignore_velocity",
+              "label": "Velocity",
+              "type": "enum",
+              "options": [
+                "On",
+                "Ignore"
+              ],
+              "default": 1
+            }
           ],
-          "knobs": ["polyphony", "oversample", "osc_mode", "ignore_velocity"]
+          "knobs": [
+            "polyphony",
+            "oversample",
+            "osc_mode",
+            "ignore_velocity"
+          ]
+        },
+        "arp": {
+          "name": "Arpeggiator",
+          "params": [
+            {
+              "key": "arpeggio",
+              "label": "Arp",
+              "type": "enum",
+              "options": [
+                "Off",
+                "On"
+              ],
+              "default": 0
+            },
+            {
+              "key": "arp_mode",
+              "label": "Mode",
+              "type": "enum",
+              "options": [
+                "Up",
+                "Up/Down",
+                "Down"
+              ],
+              "default": 0
+            },
+            {
+              "key": "arp_range",
+              "label": "Range",
+              "type": "enum",
+              "options": [
+                "1 Oct",
+                "2 Oct",
+                "3 Oct"
+              ],
+              "default": 0
+            },
+            {
+              "key": "arp_sync",
+              "label": "Clock",
+              "type": "enum",
+              "options": [
+                "Free",
+                "Sync"
+              ],
+              "default": 1
+            },
+            {
+              "key": "arp_div",
+              "label": "Division",
+              "type": "enum",
+              "options": [
+                "4 Beats",
+                "2 Beats",
+                "1/4",
+                "1/4T",
+                "1/8",
+                "1/8T",
+                "1/16",
+                "1/16T",
+                "1/32"
+              ],
+              "default": 6
+            },
+            {
+              "key": "arp_rate",
+              "label": "Free Rate",
+              "type": "float",
+              "min": 0.0,
+              "max": 1.0,
+              "default": 0.25,
+              "step": 0.02,
+              "unit": "%"
+            },
+            {
+              "key": "hold",
+              "label": "Hold",
+              "type": "enum",
+              "options": [
+                "Off",
+                "On"
+              ],
+              "default": 0
+            }
+          ],
+          "knobs": [
+            "arpeggio",
+            "arp_mode",
+            "arp_range",
+            "arp_sync",
+            "arp_div",
+            "arp_rate",
+            "hold"
+          ]
         }
       }
     }

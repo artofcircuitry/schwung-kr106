@@ -39,6 +39,12 @@ enum EParams
   kTransposeOffset, kBenderLfo,
   kAdsrMode,
   kMasterVol,
+  kSettingVoices, kSettingOversample, kSettingIgnoreVel,
+  kSettingArpLimitKbd, kSettingArpSync, kSettingLfoSync,
+  kSettingMonoRetrig, kSettingMidiSysEx,
+  kArpQuantize,
+  kLfoQuantize,
+  kSettingOscMode,
   kNumParams
 };
 
@@ -86,6 +92,12 @@ static const ParamDef kParamTable[] = {
     {"oct_range",    kOctTranspose},
     {"porta_mode",   kPortaMode},
     {"hold",         kHold},
+    /* arpeggiator (live params, not stored in presets) */
+    {"arpeggio",     kArpeggio},
+    {"arp_mode",     kArpMode},
+    {"arp_range",    kArpRange},
+    {"arp_rate",     kArpRate},
+    {"arp_div",      kArpQuantize},
 };
 static const int kParamTableSize = (int)(sizeof(kParamTable) / sizeof(kParamTable[0]));
 
@@ -286,6 +298,7 @@ static void v2_set_param(void *instance, const char *key, const char *val)
     if (!inst || !key || !val) return;
 
     if (strcmp(key, "preset") == 0)          { loadPreset(inst, atoi(val)); return; }
+    if (strcmp(key, "arp_sync") == 0)        { inst->dsp->mArp.mSyncToHost = atoi(val) != 0; return; }
     if (strcmp(key, "all_notes_off") == 0)   { inst->dsp->AllNotesOff(); return; }
     if (strcmp(key, "volume") == 0)
     {
@@ -344,6 +357,8 @@ static int v2_get_param(void *instance, const char *key, char *buf, int buf_len)
 
     if (strcmp(key, "preset") == 0)
         return snprintf(buf, buf_len, "%d", inst->preset);
+    if (strcmp(key, "arp_sync") == 0)
+        return snprintf(buf, buf_len, "%d", inst->dsp->mArp.mSyncToHost ? 1 : 0);
     if (strcmp(key, "preset_count") == 0)
         return snprintf(buf, buf_len, "%d", kNumFactoryPresets);
     if (strcmp(key, "preset_name") == 0)
@@ -400,6 +415,23 @@ static void v2_render_block(void *instance, int16_t *out_interleaved_lr, int fra
         if (out_interleaved_lr && frames > 0)
             memset(out_interleaved_lr, 0, (size_t)frames * 2 * sizeof(int16_t));
         return;
+    }
+
+    /* Feed the Move's clock to the arpeggiator when synced. All host
+     * callbacks are optional; missing ones leave the tempo-matched
+     * free-run path (mHostPlaying=false). */
+    if (inst->dsp->mArp.mSyncToHost && g_host)
+    {
+        kr106::Arpeggiator &arp = inst->dsp->mArp;
+        if (g_host->get_bpm)
+        {
+            float bpm = g_host->get_bpm();
+            if (bpm > 1.f) arp.mHostBPM = (double)bpm;
+        }
+        if (g_host->get_beat_position)
+            arp.mHostBeatPos = g_host->get_beat_position();
+        arp.mHostPlaying = g_host->get_clock_status &&
+                           g_host->get_clock_status() == MOVE_CLOCK_STATUS_RUNNING;
     }
 
     memset(inst->bufL, 0, (size_t)frames * sizeof(float));
