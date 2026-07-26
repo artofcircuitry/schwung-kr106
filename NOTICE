@@ -1,0 +1,25 @@
+schwung-kr106
+=============
+
+This module is the Ableton Move port of **Ultramaster KR-106**, a
+Roland Juno-6/60/106 emulation by the Ultramaster Group:
+
+  Karl LaRocca <kayrock@gmail.com>
+  David Mansfield <dmansfield@gmail.com>
+  2026 rewrite: Karl LaRocca
+  https://github.com/kayrockscreenprinting/ultramaster_kr106
+
+Distributed under the GNU General Public License v3.0 (see LICENSE).
+The Move build uses the JUCE-free DSP core only; the JUCE framework is
+not included in or linked by this module.
+
+Built for the Schwung framework by Charles Vestal (MIT licensed):
+  https://github.com/charlesvestal/schwung
+The schwung-hera module (GPL-3.0) served as the porting reference:
+  https://github.com/charlesvestal/schwung-hera
+
+Trademarks
+----------
+Roland, Juno, Juno-6, Juno-60, and Juno-106 are trademarks of Roland
+Corporation. Roland Corporation is not affiliated with and does not
+endorse this project. Ableton and Move are trademarks of Ableton AG.

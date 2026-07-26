@@ -2,7 +2,7 @@
   "id": "kr106",
   "name": "KR-106",
   "abbrev": "KR",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Roland Juno-6/60/106 emulation based on Ultramaster KR-106",
   "author": "kayrockscreenprinting (Schwung port)",
   "license": "GPL-3.0",

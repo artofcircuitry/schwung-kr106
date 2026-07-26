@@ -27,10 +27,40 @@ Output: `dist/kr106-module.tar.gz`.
 
 ## Installing
 
-Copy to the Move (with Schwung installed) and extract into
-`/data/UserData/schwung/modules/synth/`, or install through the
-Schwung Manager at `http://move.local:7700`.
+With [Schwung](https://schwung.dev/) installed on your Move:
+
+**Module Store (once cataloged):** Main menu -> Module Store ->
+Sound Generators -> KR-106 -> Install.
+
+**Manual:** copy and extract the tarball:
+
+```bash
+scp dist/kr106-module.tar.gz ableton@move.local:/tmp/
+ssh ableton@move.local 'mkdir -p /data/UserData/schwung/modules/sound_generators/kr106 && \
+  tar xzf /tmp/kr106-module.tar.gz -C /data/UserData/schwung/modules/sound_generators/kr106 --strip-components=1'
+```
+
+Then add KR-106 as the sound generator in a Schwung chain. After
+replacing files on an already-loaded module, re-select it in the chain
+(or power-cycle) — the loaded library doesn't refresh on disk changes.
+
+## Controls
+
+Entering the KR-106 device shows the preset browser (jog wheel browses
+all 256 presets — 128 Juno-60 + 128 Juno-106) with the 8 encoders on
+Volume / Cutoff / Resonance / VCF Env / Attack / Decay / Release /
+Chorus. Menu pages below the presets: **DCO**, **VCF/HPF**,
+**Envelope/VCA**, **LFO/Chorus**, **Performance** (portamento, bender,
+hold, octave), **Arpeggiator** (Up / Up-Down / Down, 1-3 octaves,
+synced to the Move's clock or free-running, divisions from 4 beats to
+1/32 incl. triplets), and **Engine Settings** (voices, oversampling,
+oscillator model, velocity).
 
 ## License
 
-GPL-3.0, same as the upstream KR-106 project.
+GPL-3.0, same as the upstream KR-106 project (see LICENSE and NOTICE).
+The Move build uses the JUCE-free DSP core; JUCE is not included.
+
+Roland, Juno, Juno-6, Juno-60, and Juno-106 are trademarks of Roland
+Corporation, which is not affiliated with and does not endorse this
+project.
